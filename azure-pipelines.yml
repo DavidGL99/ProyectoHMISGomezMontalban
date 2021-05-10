@@ -10,7 +10,24 @@ pool:
   vmImage: ubuntu-latest
 
 steps:
-
+- task: Maven@3
+  inputs:
+    mavenPomFile: 'ProyectoHMIS2021AzurePipeline/pom.xml'
+    goals: 'site'
+    publishJUnitResults: true
+    testResultsFiles: '**/surefire-reports/TEST-*.xml'
+    codeCoverageToolOption: 'JaCoCo'
+    codeCoverageFailIfEmpty: true
+    codeCoverageRestoreOriginalPomXml: true
+    javaHomeOption: 'JDKVersion'
+    jdkVersionOption: '1.8'
+    mavenVersionOption: 'Default'
+    mavenAuthenticateFeed: false
+    effectivePomSkip: false
+    sonarQubeRunAnalysis: false
+    checkStyleRunAnalysis: true
+    pmdRunAnalysis: true
+    findBugsRunAnalysis: true
 - task: DotNetCoreCLI@2
   displayName: 'Install ReportGenerator'
   inputs:
@@ -36,21 +53,4 @@ steps:
     codeCoverageTool: 'cobertura'
     summaryFileLocation: '$(Build.SourcesDirectory)/**/coverage.cobertura.xml'
 
-- task: Maven@3
-  inputs:
-    mavenPomFile: 'ProyectoHMIS2021AzurePipeline/pom.xml'
-    goals: 'site'
-    publishJUnitResults: true
-    testResultsFiles: '**/surefire-reports/TEST-*.xml'
-    codeCoverageToolOption: 'JaCoCo'
-    codeCoverageFailIfEmpty: true
-    codeCoverageRestoreOriginalPomXml: true
-    javaHomeOption: 'JDKVersion'
-    jdkVersionOption: '1.8'
-    mavenVersionOption: 'Default'
-    mavenAuthenticateFeed: false
-    effectivePomSkip: false
-    sonarQubeRunAnalysis: false
-    checkStyleRunAnalysis: true
-    pmdRunAnalysis: true
-    findBugsRunAnalysis: true
+
