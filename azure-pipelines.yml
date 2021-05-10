@@ -12,7 +12,7 @@ pool:
 steps:
 - task: Maven@3
   inputs:
-    mavenPomFile: 'pom.xml'
+    mavenPomFile: 'ProyectoHMIS2021AzurePipeline/pom.xml'
     publishJUnitResults: true
     testResultsFiles: '**/surefire-reports/TEST-*.xml'
     codeCoverageToolOption: 'Cobertura'
