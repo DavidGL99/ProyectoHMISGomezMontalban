@@ -24,3 +24,17 @@ steps:
     checkStyleRunAnalysis: true
     pmdRunAnalysis: true
     findBugsRunAnalysis: true
+
+  
+- task: PublishTestResults@2
+  inputs:
+    testResultsFormat: 'JUnit'
+    testResultsFiles: '**/test-*.xml'
+- task: PublishCodeCoverageResults@1
+
+  displayName: 'Publish code coverage from **/test-*.xml'
+
+  inputs:
+
+    summaryFileLocation: '**/test-*.xml'
+
